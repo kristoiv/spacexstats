@@ -1,6 +1,8 @@
 # SpaceX Stats parser
 Small command line utility that parses the webpage spacexstats.com and prints data about upcoming spacex launches + live countdown.
 
+Discuss on HN: https://news.ycombinator.com/item?id=11138143
+
 ## Data:
 All data is owned and provided by spacexstats.com
 
