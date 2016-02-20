@@ -128,7 +128,8 @@ func (self *NextMission) formatCountdownToLaunch() string {
     }
 
     if !self.TimeKnown {
-        ld = ld.Round(24 * time.Hour)
+        ld = ld.Round(time.Hour)
+        ld = ld.Add(-(time.Duration(ld.Hour())*time.Hour))
         format = format + " (specific time unknown)"
     }
 
