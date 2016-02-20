@@ -51,20 +51,28 @@ func Fetch() (*NextMission, error) {
     m := jsonObj[0][0]
     mr := m["result"].(map[string]interface{})
 
-    launchTime, err := time.Parse("2006-01-02 15:04:05", mr["launch_date_time"].(string))
+    loc, err := time.LoadLocation("America/New_York")
     if err != nil {
         return nil, err
     }
 
-    created, err := time.Parse("2006-01-02 15:04:05", mr["created_at"].(string))
+    launchTime, err := time.ParseInLocation("2006-01-02 15:04:05", mr["launch_date_time"].(string), loc)
     if err != nil {
         return nil, err
     }
+    launchTime = launchTime.UTC()
 
-    updated, err := time.Parse("2006-01-02 15:04:05", mr["updated_at"].(string))
+    created, err := time.ParseInLocation("2006-01-02 15:04:05", mr["created_at"].(string), loc)
     if err != nil {
         return nil, err
     }
+    created = created.UTC()
+
+    updated, err := time.ParseInLocation("2006-01-02 15:04:05", mr["updated_at"].(string), loc)
+    if err != nil {
+        return nil, err
+    }
+    updated = updated.UTC()
 
     return &NextMission{
         Title: m["name"].(string),
