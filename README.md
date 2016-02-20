@@ -13,6 +13,20 @@ All data is owned and provided by spacexstats.com
 
 Obs: make sure your terminal is wide enough, the countdown uses \r to return to the start of the line every seconds to reprint the content. Thus if the terminal isn't wide enough the content will get garbled.
 
+## Output example
+```bash
+$ spacex
+# Next Launch - SES-9
+SpaceX's second launch for SES, lofting a 5300kg communications satellite that will provide SES with more coverage over Southeast Asia.
+
+Status: Upcoming
+Launch time: 2016-02-24 UTC
+Created: 2016-02-08 09:29 UTC
+Updated: 2016-02-08 09:29 UTC
+
+Countdown until Launch: 3 days, 23 hours, 14 minutes, 0 seconds (specific time unknown)
+```
+
 ## License
 Copyright (c) 2016 Kristoffer A. Iversen All rights reserved.
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
