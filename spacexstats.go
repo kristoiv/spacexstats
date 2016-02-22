@@ -51,28 +51,28 @@ func Fetch() (*NextMission, error) {
     m := jsonObj[0][0]
     mr := m["result"].(map[string]interface{})
 
-    loc, err := time.LoadLocation("America/New_York")
+    /*loc, err := time.LoadLocation("America/New_York")
     if err != nil {
         return nil, err
-    }
+    }*/
 
-    launchTime, err := time.ParseInLocation("2006-01-02 15:04:05", mr["launch_date_time"].(string), loc)
+    launchTime, err := time.Parse("2006-01-02 15:04:05", mr["launch_date_time"].(string))
     if err != nil {
         return nil, err
     }
-    launchTime = launchTime.UTC()
+    //launchTime = launchTime.UTC()
 
-    created, err := time.ParseInLocation("2006-01-02 15:04:05", mr["created_at"].(string), loc)
+    created, err := time.Parse("2006-01-02 15:04:05", mr["created_at"].(string))
     if err != nil {
         return nil, err
     }
-    created = created.UTC()
+    //created = created.UTC()
 
-    updated, err := time.ParseInLocation("2006-01-02 15:04:05", mr["updated_at"].(string), loc)
+    updated, err := time.Parse("2006-01-02 15:04:05", mr["updated_at"].(string))
     if err != nil {
         return nil, err
     }
-    updated = updated.UTC()
+    //updated = updated.UTC()
 
     return &NextMission{
         Title: m["name"].(string),
@@ -98,14 +98,14 @@ func (self *NextMission) PrintSummary() {
     if !self.TimeKnown {
         launchTimeFormat = strings.TrimSuffix("2006-01-02 15:04", " 15:04")
     }
-    launchTime := self.LaunchDateTime.Format(launchTimeFormat) + " UTC"
+    launchTime := self.LaunchDateTime.Local().Format(launchTimeFormat) + " (local system time)"
     fmt.Printf("# %s\n%s\n\nStatus: %s\nLaunch time: %s\nCreated: %s\nUpdated: %s\n\n",
         self.FullTitle,
         self.Description,
         self.Status,
         launchTime,
-        self.Created.Format("2006-01-02 15:04") + " UTC",
-        self.Updated.Format("2006-01-02 15:04") + " UTC",
+        self.Created.Local().Format("2006-01-02 15:04") + " (local system time)",
+        self.Updated.Local().Format("2006-01-02 15:04") + " (local system time)",
     )
 }
 
